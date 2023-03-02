@@ -62,14 +62,11 @@ namespace SandboxDotNetv2._0._0._0
 
         private void button4_Click(object sender, EventArgs e)
         {
-
-            //permissions.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
-
+            
             // Grant additional permissions based on selected items
             foreach (object itemChecked in checkedListBox1.CheckedItems)
             {
-                Console.WriteLine(itemChecked.ToString());
-
+               
                 switch (itemChecked.ToString())
                 {
                     case "SecurityPermission - Execution":
@@ -88,7 +85,7 @@ namespace SandboxDotNetv2._0._0._0
                         permissions.AddPermission(new UIPermission(UIPermissionWindow.SafeTopLevelWindows, UIPermissionClipboard.AllClipboard));
                         break;
                     case "ReflectionPermission - ReflectionEmit":
-                        permissions.AddPermission(new ReflectionPermission(ReflectionPermissionFlag.ReflectionEmit));
+                        permissions.AddPermission(new ReflectionPermission(ReflectionPermissionFlag.AllFlags));
                         break;
                     case "FileDialogPermission":
                         permissions.AddPermission(new FileDialogPermission(FileDialogPermissionAccess.Open));
@@ -107,7 +104,7 @@ namespace SandboxDotNetv2._0._0._0
                         permissions.AddPermission(new PrincipalPermission(null, "Administrators"));
                         break;
                     case "EnvironmentPermission":
-                        permissions.AddPermission(new EnvironmentPermission(EnvironmentPermissionAccess.AllAccess, "PATH"));
+                        permissions.AddPermission(new EnvironmentPermission(EnvironmentPermissionAccess.AllAccess, "*"));
                         break;
 
                         // Add more cases for other permissions as needed
@@ -125,12 +122,15 @@ namespace SandboxDotNetv2._0._0._0
 
                 // Add the selected item to the second CheckBoxList
                 checkedListBox2.Items.Add(selectedItem);
+
+                Console.WriteLine(selectedItem);
             }
             else
             {
                 // Display a message to the user indicating that they need to select an item before moving it
                 MessageBox.Show("Please select an item before moving it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
         }
 
         class Sandboxer : MarshalByRefObject
@@ -143,9 +143,7 @@ namespace SandboxDotNetv2._0._0._0
                 adSetup.ApplicationBase = Path.GetFullPath(pathToUntrusted);
 
                 //Setting the permissions for the AppDomain. We give the permission to execute and to
-                //read/discover the location where the untrusted code is loaded.
-                // PermissionSet permSet = new PermissionSet(PermissionState.None);
-                // permSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
+                //read/discover the location where the untrusted code is loaded.  
 
                 //We want the sandboxer assembly's strong name, so that we can add it to the full trust list.
                 StrongName fullTrustAssembly = typeof(Sandboxer).Assembly.Evidence.GetHostEvidence<StrongName>();
@@ -237,8 +235,6 @@ namespace SandboxDotNetv2._0._0._0
         {
 
             string searchString = textBox4.Text;
-
-
             SearchCheckedListBox(checkedListBox1, searchString);
             SearchCheckedListBox(checkedListBox2, searchString);
         }
