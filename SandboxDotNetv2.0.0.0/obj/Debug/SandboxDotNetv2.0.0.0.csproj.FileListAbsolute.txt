@@ -1,0 +1,8 @@
+C:\Users\cents\source\repos\SandboxDotNet v1.0.0.0\SandboxDotNetv2.0.0.0\bin\Debug\SandboxDotNetv2.0.0.0.exe
+C:\Users\cents\source\repos\SandboxDotNet v1.0.0.0\SandboxDotNetv2.0.0.0\bin\Debug\SandboxDotNetv2.0.0.0.pdb
+C:\Users\cents\source\repos\SandboxDotNet v1.0.0.0\SandboxDotNetv2.0.0.0\obj\Debug\SandboxDotNetv2.0.0.0.csproj.CoreCompileInputs.cache
+C:\Users\cents\source\repos\SandboxDotNet v1.0.0.0\SandboxDotNetv2.0.0.0\obj\Debug\SandboxDotNetv2.0.0.0.exe
+C:\Users\cents\source\repos\SandboxDotNet v1.0.0.0\SandboxDotNetv2.0.0.0\obj\Debug\SandboxDotNetv2.0.0.0.pdb
+C:\Users\cents\source\repos\SandboxDotNet v1.0.0.0\SandboxDotNetv2.0.0.0\obj\Debug\SandboxDotNetv2.0.0.0.csproj.AssemblyReference.cache
+C:\Users\cents\source\repos\SandboxDotNet v1.0.0.0\SandboxDotNetv2.0.0.0\obj\Debug\SandboxDotNetv2._0._0._0.Form1.resources
+C:\Users\cents\source\repos\SandboxDotNet v1.0.0.0\SandboxDotNetv2.0.0.0\obj\Debug\SandboxDotNetv2.0.0.0.csproj.GenerateResource.cache
