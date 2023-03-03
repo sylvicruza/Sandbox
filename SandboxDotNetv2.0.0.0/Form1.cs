@@ -44,6 +44,7 @@ namespace SandboxDotNetv2._0._0._0
 
         private void button3_Click(object sender, EventArgs e)
         {
+
             string path = textBox1.Text; //path to the file
             string argument = textBox2.Text;
 
@@ -137,9 +138,13 @@ namespace SandboxDotNetv2._0._0._0
         {
             public void AppDomainSetup(string pathToUntrusted, string untrustedAssembly, string[] parameters, PermissionSet permissionSet)
             {
-                //Setting the AppDomainSetup. It is very important to set the ApplicationBase to a folder
-                //other than the one in which the sandboxer resides.
-                AppDomainSetup adSetup = new AppDomainSetup();
+                try
+                {
+                    //Setting the AppDomainSetup. It is very important to set the ApplicationBase to a folder
+                    //other than the one in which the sandboxer resides.
+                    AppDomainSetup adSetup = new AppDomainSetup();
+                if(pathToUntrusted =="") throw new FileLoadException("The path to file not defined");
+                
                 adSetup.ApplicationBase = Path.GetFullPath(pathToUntrusted);
 
                 //Setting the permissions for the AppDomain. We give the permission to execute and to
@@ -160,13 +165,17 @@ namespace SandboxDotNetv2._0._0._0
                 //Unwrap the new domain instance into a reference in this domain and use it to execute the
                 //untrusted code.
                 Sandboxer newDomainInstance = (Sandboxer)handle.Unwrap();
-                try
-                {
+                
                     newDomainInstance.ExecuteUntrustedCode(untrustedAssembly, parameters);
                 }
+                catch (FileLoadException fe)
+                {
+                    MessageBox.Show(fe.Message, "Action needed!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+             
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Application requires permission to access resource.", "Action needed!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
             }
@@ -256,5 +265,10 @@ namespace SandboxDotNetv2._0._0._0
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+        }
     }
 }

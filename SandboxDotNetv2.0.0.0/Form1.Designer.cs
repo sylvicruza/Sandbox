@@ -31,7 +31,6 @@ namespace SandboxDotNetv2._0._0._0
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -66,7 +65,6 @@ namespace SandboxDotNetv2._0._0._0
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.textBox3);
             this.tabPage1.Controls.Add(this.textBox2);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.label2);
@@ -80,14 +78,6 @@ namespace SandboxDotNetv2._0._0._0
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Program";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(129, 159);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(1031, 110);
-            this.textBox3.TabIndex = 8;
             // 
             // textBox2
             // 
@@ -105,6 +95,7 @@ namespace SandboxDotNetv2._0._0._0
             this.button2.TabIndex = 5;
             this.button2.Text = "Clear";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
             // 
@@ -296,7 +287,6 @@ namespace SandboxDotNetv2._0._0._0
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.CheckedListBox checkedListBox2;

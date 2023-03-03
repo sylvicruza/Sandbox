@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\FileException.cs" />
+    <Compile Include="Exceptions\PermissionException.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +66,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="Sandbox2KeyPair.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
