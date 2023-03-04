@@ -1,7 +1,7 @@
 ﻿
 namespace SandboxDotNetv2._0._0._0
 {
-    partial class Form1
+    partial class SandboxUserInterface
     {
         /// <summary>
         /// Required designer variable.
@@ -31,12 +31,12 @@ namespace SandboxDotNetv2._0._0._0
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.argumentTextBox = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.pathTextBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button6 = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -65,12 +65,12 @@ namespace SandboxDotNetv2._0._0._0
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.textBox2);
+            this.tabPage1.Controls.Add(this.argumentTextBox);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.pathTextBox);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -79,13 +79,13 @@ namespace SandboxDotNetv2._0._0._0
             this.tabPage1.Text = "Program";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // argumentTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(129, 87);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(914, 36);
-            this.textBox2.TabIndex = 7;
+            this.argumentTextBox.Location = new System.Drawing.Point(129, 87);
+            this.argumentTextBox.Multiline = true;
+            this.argumentTextBox.Name = "argumentTextBox";
+            this.argumentTextBox.Size = new System.Drawing.Size(914, 36);
+            this.argumentTextBox.TabIndex = 7;
             // 
             // button2
             // 
@@ -114,7 +114,7 @@ namespace SandboxDotNetv2._0._0._0
             this.button1.TabIndex = 2;
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.OpenFileButton_Click);
             // 
             // label1
             // 
@@ -125,13 +125,13 @@ namespace SandboxDotNetv2._0._0._0
             this.label1.TabIndex = 1;
             this.label1.Text = "Path:";
             // 
-            // textBox1
+            // pathTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(129, 32);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(904, 35);
-            this.textBox1.TabIndex = 0;
+            this.pathTextBox.Location = new System.Drawing.Point(129, 32);
+            this.pathTextBox.Multiline = true;
+            this.pathTextBox.Name = "pathTextBox";
+            this.pathTextBox.Size = new System.Drawing.Size(904, 35);
+            this.pathTextBox.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -150,7 +150,6 @@ namespace SandboxDotNetv2._0._0._0
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Permissions";
             this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
             // button6
             // 
@@ -198,7 +197,7 @@ namespace SandboxDotNetv2._0._0._0
             this.button5.TabIndex = 3;
             this.button5.Text = "<== Remove Permission ==";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.Click += new System.EventHandler(this.RemovePermissionButton_Click);
             // 
             // checkedListBox2
             // 
@@ -207,7 +206,6 @@ namespace SandboxDotNetv2._0._0._0
             this.checkedListBox2.Name = "checkedListBox2";
             this.checkedListBox2.Size = new System.Drawing.Size(373, 276);
             this.checkedListBox2.TabIndex = 2;
-            this.checkedListBox2.SelectedIndexChanged += new System.EventHandler(this.checkedListBox2_SelectedIndexChanged);
             // 
             // button4
             // 
@@ -217,29 +215,33 @@ namespace SandboxDotNetv2._0._0._0
             this.button4.TabIndex = 1;
             this.button4.Text = "== Add Permission ==>";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.AddPermissionButton_Click);
             // 
             // checkedListBox1
             // 
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Items.AddRange(new object[] {
             "SecurityPermission - Execution",
+            "SecurityPermission - UnmanagedCode",
             "FileIOPermission - Read",
             "FileIOPermission - Write",
             "FileIOPermission - AllAccess",
             "UIPermission",
+            "ReflectionPermission - Reflection",
             "ReflectionPermission - ReflectionEmit",
-            "FileDialogPermission",
+            "FileDialogPermission - Open",
+            "SandboxPermission - AllAccess",
+            "WebPermission - NetworkAccess",
             "RegistryPermission - Read",
             "RegistryPermission - Write",
             "RegistryPermission - AllAccess",
             "PrincipalPermission",
-            "EnvironmentPermission"});
+            "EnvironmentPermission - Read CommandLine",
+            "EnvironmentPermission - AllAcesss"});
             this.checkedListBox1.Location = new System.Drawing.Point(36, 71);
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(373, 276);
             this.checkedListBox1.TabIndex = 0;
-            this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
             // 
             // button3
             // 
@@ -249,22 +251,21 @@ namespace SandboxDotNetv2._0._0._0
             this.button3.TabIndex = 6;
             this.button3.Text = "Run";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.RunButton_Click);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // Form1
+            // SandboxUserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1268, 565);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.tabControl1);
-            this.Name = "Form1";
+            this.Name = "SandboxUserInterface";
             this.Text = "SandboxDotNetv2.0.0.0";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -281,12 +282,12 @@ namespace SandboxDotNetv2._0._0._0
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox pathTextBox;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox argumentTextBox;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.CheckedListBox checkedListBox2;
