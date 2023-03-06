@@ -14,7 +14,7 @@ namespace SandboxDotNetv2._0._0._0
         private string untrustedClass;
 
         //..
-        private readonly PermissionSet permissions = new PermissionSet(PermissionState.None);
+        private readonly PermissionSet permissions = null;
         private readonly Sandboxer sandbox = new Sandboxer();
         //..
       
@@ -65,8 +65,8 @@ namespace SandboxDotNetv2._0._0._0
             foreach (var itemChecked in checkedListBox1.CheckedItems)
             {
                 var permissionType = itemChecked.ToString();
-                var permission = PermissionFactory.CreatePermission(permissionType);
-                permissions.AddPermission(permission);
+                var permission = PermissionFactory.permissions(permissionType);
+             //   permissions.AddPermission(permission.)
             }
             // ...
         }
