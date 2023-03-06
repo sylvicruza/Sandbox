@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Security;
 using System.Security.Permissions;
@@ -16,7 +17,7 @@ namespace SandboxDotNetv2._0._0._0
         private readonly PermissionSet permissions = new PermissionSet(PermissionState.None);
         private readonly Sandboxer sandbox = new Sandboxer();
         //..
-
+      
 
         public SandboxUserInterface()
         {
@@ -41,9 +42,13 @@ namespace SandboxDotNetv2._0._0._0
 
             string[] arguments = new string[] { argument };
             Array.ForEach(arguments, s => Console.WriteLine(s));
+            if (string.IsNullOrEmpty(path)) { 
+                MessageBox.Show("File path not specified", "Action needed!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            sandbox.AppDomainSetup(path, untrustedClass, arguments, permissions);
-            
+            sandbox.SetupAndRun(path, untrustedClass, arguments, permissions);
+
         }
 
         private void AddPermissionButton_Click(object sender, EventArgs e)
@@ -83,7 +88,7 @@ namespace SandboxDotNetv2._0._0._0
                 // Display a message to the user indicating that they need to select an item before moving it
                 MessageBox.Show("Please select an item before moving it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }   
+        }
 
         private void MovePermissionToLeft()
         {
@@ -108,7 +113,7 @@ namespace SandboxDotNetv2._0._0._0
         {
             MovePermissionToLeft();
         }
-       
+
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -140,6 +145,31 @@ namespace SandboxDotNetv2._0._0._0
         {
             pathTextBox.Text = "";
             argumentTextBox.Text = "";
+        }
+
+        private void SandboxUserInterface_Load(object sender, EventArgs e)
+        {
+            // Get the width and height of the screen
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            // Set the width and height of the form to two-thirds of the screen width and height, respectively
+            this.Width = (int)(screenWidth * 0.75);
+            this.Height = (int)(screenHeight * 0.80);
+
+            // Center the form on the screen
+            this.StartPosition = FormStartPosition.CenterScreen;
+        }
+
+        private void changeBackgroundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                this.BackColor = colorDialog.Color;
+            }
+
+
         }
     }
 }

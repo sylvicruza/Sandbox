@@ -13,60 +13,55 @@ using System.Windows.Forms;
 
 namespace SandboxDotNetv2._0._0._0
 {
-  public  class Sandboxer : MarshalByRefObject
+    public class Sandboxer : MarshalByRefObject
     {
-        public void AppDomainSetup(string pathToUntrusted, string untrustedAssembly, string[] parameters, PermissionSet permissionSet)
+
+        public void SetupAndRun(string pathToUntrusted, string untrustedAssembly, string[] parameters, PermissionSet permissionSet)
         {
             try
             {
-                // Setting the AppDomainSetup. It is very important to set the ApplicationBase to a folder
-                // other than the one in which the sandboxer resides.
-                AppDomainSetup adSetup = new AppDomainSetup();
-                if (pathToUntrusted == "") throw new FileLoadException("The path to file not defined");
-
-                adSetup.ApplicationBase = Path.GetFullPath(pathToUntrusted);
-
-                // Setting the permissions for the AppDomain. We give the permission to execute and to
-                // read/discover the location where the untrusted code is loaded.
-
-                // We want the sandboxer assembly's strong name, so that we can add it to the full trust list.
+                AppDomainSetup adSetup = CreateAppDomainSetup(pathToUntrusted);
                 StrongName fullTrustAssembly = typeof(Sandboxer).Assembly.Evidence.GetHostEvidence<StrongName>();
+                ObjectHandle handle = CreateSandboxAppDomain(permissionSet, adSetup, fullTrustAssembly);
+                ExecuteInSandboxedDomain(untrustedAssembly, parameters, handle);
 
-                // Now we have everything we need to create the AppDomain, so let's create it.
-                AppDomain newDomain = AppDomain.CreateDomain("Sandbox", null, adSetup, permissionSet, fullTrustAssembly);
-
-                // Use CreateInstanceFrom to load an instance of the Sandboxer class into the
-                // new AppDomain.
-                ObjectHandle handle = Activator.CreateInstanceFrom(
-                    newDomain, typeof(Sandboxer).Assembly.ManifestModule.FullyQualifiedName,
-                    typeof(Sandboxer).FullName
-                );
-                // Unwrap the new domain instance into a reference in this domain and use it to execute the
-                // untrusted code.
-                Sandboxer newDomainInstance = (Sandboxer)handle.Unwrap();
-
-                newDomainInstance.ExecuteUntrustedCode(untrustedAssembly, parameters);
             }
-            catch (FileLoadException fe)
-            {
-                MessageBox.Show(fe.Message, "Action needed!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
             catch (Exception ex)
             {
-                MessageBox.Show("Application requires permission to access resource.", "Action needed!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string message = ex.Message;
+                MessageBox.Show("Application requires permission to access resource. \n It " + message, "Action needed!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);               
             }
 
         }
+
+        private static AppDomainSetup CreateAppDomainSetup(string pathToUntrusted)
+        {
+            AppDomainSetup adSetup = new AppDomainSetup();
+            adSetup.ApplicationBase = Path.GetFullPath(pathToUntrusted);
+            return adSetup;
+        }
+        private static ObjectHandle CreateSandboxAppDomain(PermissionSet permissionSet, AppDomainSetup adSetup, StrongName fullTrustAssembly)
+        {
+            AppDomain newDomain = AppDomain.CreateDomain("Sandbox", null, adSetup, permissionSet, fullTrustAssembly);
+            ObjectHandle handle = Activator.CreateInstanceFrom(
+                newDomain, typeof(Sandboxer).Assembly.ManifestModule.FullyQualifiedName,
+                typeof(Sandboxer).FullName
+            );
+            return handle;
+        }
+
+        private static void ExecuteInSandboxedDomain(string untrustedAssembly, string[] parameters, ObjectHandle handle)
+        {
+            Sandboxer newDomainInstance = (Sandboxer)handle.Unwrap();
+            newDomainInstance.ExecuteUntrustedCode(untrustedAssembly, parameters);
+        }
+
         public void ExecuteUntrustedCode(string assemblyName, string[] parameters)
         {
-            // Load the MethodInfo for a method in the new Assembly. This might be a method you know, or
-            // you can use Assembly.EntryPoint to get to the main function in an executable.
             MethodInfo target = Assembly.Load(assemblyName).EntryPoint;
             try
             {
                 // Now invoke the method.
-                // bool retVal = (bool)target.Invoke(null, parameters);
                 target.Invoke(null, new object[] { parameters });
 
             }
@@ -74,10 +69,13 @@ namespace SandboxDotNetv2._0._0._0
             {
                 // When we print informations from a SecurityException extra information can be printed if we are
                 // calling it with a full-trust stack.
-                new PermissionSet(PermissionState.Unrestricted).Assert();
                 Console.WriteLine("SecurityException caught:\n{0}", ex.ToString());
+                MessageBox.Show(ex.Message);              
+                new PermissionSet(PermissionState.Unrestricted).Assert();            
                 CodeAccessPermission.RevertAssert();
-                Console.ReadLine();
+                return;
+
+                
             }
         }
 
