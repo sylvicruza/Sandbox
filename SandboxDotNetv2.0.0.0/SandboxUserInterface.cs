@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Security;
@@ -14,7 +15,7 @@ namespace SandboxDotNetv2._0._0._0
         private string untrustedClass;
 
         //..
-        private readonly PermissionSet permissions = null;
+        private readonly PermissionSet permissions = new PermissionSet(PermissionState.None);
         private readonly Sandboxer sandbox = new Sandboxer();
         //..
       
@@ -43,19 +44,33 @@ namespace SandboxDotNetv2._0._0._0
             string[] arguments = new string[] { argument };
             Array.ForEach(arguments, s => Console.WriteLine(s));
             if (string.IsNullOrEmpty(path)) { 
-                MessageBox.Show("File path not specified", "Action needed!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Messages.InvalidInput, Messages.Attention, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            sandbox.SetupAndRun(path, untrustedClass, arguments, permissions);
+
+            if (radioButton1.Checked)
+            {
+                Console.WriteLine("Enable policy access");
+                sandbox.SetupAndRun(path, untrustedClass, arguments, SandboxAccessPolicy.UpdatePermissionSet(permissions));
+            }
+
+            sandbox.SetupAndRun(path, untrustedClass, arguments, PermissionFactory.PermissionBuilder(permissions));
 
         }
 
         private void AddPermissionButton_Click(object sender, EventArgs e)
         {
             // Grant additional permissions based on selected items
-            PermissionManager();
-            MovePermissionToRight();
+            if (radioButton2.Checked)
+            {
+                PermissionManager();
+                MovePermission(checkedListBox1, checkedListBox2);
+            }
+            else
+            {  // Display a message to the user indicating that they need to select an item before moving it
+                MessageBox.Show(Messages.EnablePermmission, Messages.OperationFailed, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
@@ -65,75 +80,61 @@ namespace SandboxDotNetv2._0._0._0
             foreach (var itemChecked in checkedListBox1.CheckedItems)
             {
                 var permissionType = itemChecked.ToString();
-                var permission = PermissionFactory.permissions(permissionType);
-             //   permissions.AddPermission(permission.)
+                var permission = PermissionFactory.CreatePermission(permissionType);
+                permissions.AddPermission(permission);
             }
             // ...
         }
-        private void MovePermissionToRight()
+        private void MovePermission(CheckedListBox moveRight, CheckedListBox moveLeft)
         {
             // Check if an item is selected in the first CheckBoxList
-            if (checkedListBox1.CheckedItems.Count > 0)
+            if (moveRight.CheckedItems.Count > 0)
             {
-                // Get the selected item
-                string selectedItem = checkedListBox1.CheckedItems[0].ToString();
-                // Remove the selected item from the first CheckBoxList
-                checkedListBox1.Items.Remove(selectedItem);
-                // Add the selected item to the second CheckBoxList
-                checkedListBox2.Items.Add(selectedItem);
-                Console.WriteLine(selectedItem);
+                List<string> selectedItems = new List<string>();
+                foreach (var itemChecked in moveRight.CheckedItems)
+                {
+                      selectedItems.Add(itemChecked.ToString());
+                }
+               
+                selectedItems.ForEach(itemChecked => {
+                    moveRight.Items.Remove(itemChecked);
+                moveLeft.Items.Add(itemChecked);
+                });
+                
             }
             else
             {
                 // Display a message to the user indicating that they need to select an item before moving it
-                MessageBox.Show("Please select an item before moving it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Messages.SelectPermmission, Messages.OperationFailed, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void MovePermissionToLeft()
-        {
-            // Check if an item is selected in the first CheckBoxList
-            if (checkedListBox2.CheckedItems.Count > 0)
-            {
-                // Get the selected item
-                string selectedItem = checkedListBox2.CheckedItems[0].ToString();
-                // Remove the selected item from the first CheckBoxList
-                checkedListBox2.Items.Remove(selectedItem);
-                // Add the selected item to the second CheckBoxList
-                checkedListBox1.Items.Add(selectedItem);
-            }
-            else
-            {
-                // Display a message to the user indicating that they need to select an item before moving it
-                MessageBox.Show("Please select an item before moving it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+      
 
         private void RemovePermissionButton_Click(object sender, EventArgs e)
         {
-            MovePermissionToLeft();
+            if (radioButton2.Checked)
+            {
+                MovePermission(checkedListBox2, checkedListBox1);
+            }
+            else
+            {  // Display a message to the user indicating that they need to select an item before moving it
+                MessageBox.Show(Messages.EnablePermmission, Messages.OperationFailed, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
 
-        private void button6_Click(object sender, EventArgs e)
-        {
 
-            string searchString = textBox4.Text;
-            SearchCheckedListBox(checkedListBox1, searchString);
-            SearchCheckedListBox(checkedListBox2, searchString);
-        }
-
-        private void SearchCheckedListBox(CheckedListBox checkedListBox, string searchString)
+        private void SearchCheckedListBox(CheckedListBox checkedListBox)
         {
             for (int i = 0; i < checkedListBox.Items.Count; i++)
             {
-                string text = checkedListBox.Items[i].ToString();
-
-                if (text.ToLower().Contains(searchString.ToLower()))
+                if (checkBox1.Checked)
                 {
                     checkedListBox.SetItemChecked(i, true);
                 }
-                else
+                else 
                 {
                     checkedListBox.SetItemChecked(i, false);
                 }
@@ -154,8 +155,8 @@ namespace SandboxDotNetv2._0._0._0
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
 
             // Set the width and height of the form to two-thirds of the screen width and height, respectively
-            this.Width = (int)(screenWidth * 0.75);
-            this.Height = (int)(screenHeight * 0.80);
+            this.Width = (int)(screenWidth * 0.85);
+            this.Height = (int)(screenHeight * 1);
 
             // Center the form on the screen
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -170,6 +171,67 @@ namespace SandboxDotNetv2._0._0._0
             }
 
 
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            SearchCheckedListBox(checkedListBox1);
+
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            SearchCheckedListBox(checkedListBox2);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(Messages.About, Messages.Information, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+      
+
+        private void checkedListBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+           
+           
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                MovePermission(checkedListBox3, checkedListBox4);
+                foreach (var itemChecked in checkedListBox3.CheckedItems)
+                {
+                    var accessType = itemChecked.ToString();
+                    var permission = SandboxAccessPolicy.UpdatePermission(accessType);
+                    permissions.AddPermission(permission);
+                }
+            }
+            else
+            {
+                // Display a message to the user indicating that they need to select an item before moving it
+                MessageBox.Show(Messages.EnableAccess, Messages.OperationFailed, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                MovePermission(checkedListBox4, checkedListBox3);
+            }
+            else
+            {  // Display a message to the user indicating that they need to select an item before moving it
+                MessageBox.Show(Messages.EnableAccess, Messages.OperationFailed, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

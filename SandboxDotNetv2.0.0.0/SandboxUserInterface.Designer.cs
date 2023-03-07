@@ -38,8 +38,6 @@ namespace SandboxDotNetv2._0._0._0
             this.label1 = new System.Windows.Forms.Label();
             this.pathTextBox = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.button6 = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
@@ -50,8 +48,18 @@ namespace SandboxDotNetv2._0._0._0
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeBackgroundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkedListBox3 = new System.Windows.Forms.CheckedListBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.checkedListBox4 = new System.Windows.Forms.CheckedListBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -63,24 +71,26 @@ namespace SandboxDotNetv2._0._0._0
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 30);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Location = new System.Drawing.Point(0, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1268, 535);
+            this.tabControl1.Size = new System.Drawing.Size(1652, 1027);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.argumentTextBox);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.pathTextBox);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Location = new System.Drawing.Point(4, 27);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1260, 506);
+            this.tabPage1.Size = new System.Drawing.Size(1644, 996);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Program";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -99,18 +109,19 @@ namespace SandboxDotNetv2._0._0._0
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(93, 60);
             this.button2.TabIndex = 5;
-            this.button2.Text = "Clear";
+            this.button2.Text = "CLEAR";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(112, 87);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(114, 98);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 16);
+            this.label2.Size = new System.Drawing.Size(108, 18);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Arguments:";
+            this.label2.Text = "ARGUMENTS:\r\n";
             // 
             // button1
             // 
@@ -118,18 +129,19 @@ namespace SandboxDotNetv2._0._0._0
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(93, 35);
             this.button1.TabIndex = 2;
-            this.button1.Text = "...";
+            this.button1.Text = "BROWSE";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.OpenFileButton_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(129, 32);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(135, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 16);
+            this.label1.Size = new System.Drawing.Size(51, 18);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Path:";
+            this.label1.Text = "PATH:";
             // 
             // pathTextBox
             // 
@@ -141,61 +153,54 @@ namespace SandboxDotNetv2._0._0._0
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button7);
             this.tabPage2.Controls.Add(this.button6);
-            this.tabPage2.Controls.Add(this.textBox4);
+            this.tabPage2.Controls.Add(this.radioButton2);
+            this.tabPage2.Controls.Add(this.radioButton1);
+            this.tabPage2.Controls.Add(this.label6);
+            this.tabPage2.Controls.Add(this.checkedListBox4);
+            this.tabPage2.Controls.Add(this.label5);
+            this.tabPage2.Controls.Add(this.checkedListBox3);
+            this.tabPage2.Controls.Add(this.checkBox2);
+            this.tabPage2.Controls.Add(this.checkBox1);
             this.tabPage2.Controls.Add(this.label4);
             this.tabPage2.Controls.Add(this.label3);
             this.tabPage2.Controls.Add(this.button5);
             this.tabPage2.Controls.Add(this.checkedListBox2);
             this.tabPage2.Controls.Add(this.button4);
             this.tabPage2.Controls.Add(this.checkedListBox1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Location = new System.Drawing.Point(4, 27);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1260, 506);
+            this.tabPage2.Size = new System.Drawing.Size(1644, 996);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Permissions";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(1066, 19);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(135, 28);
-            this.button6.TabIndex = 7;
-            this.button6.Text = "SEARCH";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(119, 18);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(924, 29);
-            this.textBox4.TabIndex = 6;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1001, 101);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(1167, 53);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(164, 16);
+            this.label4.Size = new System.Drawing.Size(184, 18);
             this.label4.TabIndex = 5;
             this.label4.Text = "SELECTED PERMISSION";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(194, 101);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(412, 53);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(164, 16);
+            this.label3.Size = new System.Drawing.Size(180, 18);
             this.label3.TabIndex = 4;
             this.label3.Text = "AVAILABLE PERMISSION";
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(517, 317);
+            this.button5.Location = new System.Drawing.Point(813, 305);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(330, 38);
             this.button5.TabIndex = 3;
@@ -205,16 +210,19 @@ namespace SandboxDotNetv2._0._0._0
             // 
             // checkedListBox2
             // 
+            this.checkedListBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkedListBox2.ForeColor = System.Drawing.Color.Blue;
             this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Location = new System.Drawing.Point(874, 121);
+            this.checkedListBox2.Location = new System.Drawing.Point(1170, 109);
             this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(373, 276);
+            this.checkedListBox2.ScrollAlwaysVisible = true;
+            this.checkedListBox2.Size = new System.Drawing.Size(373, 365);
             this.checkedListBox2.TabIndex = 2;
+            this.checkedListBox2.ThreeDCheckBoxes = true;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(517, 202);
+            this.button4.Location = new System.Drawing.Point(813, 190);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(330, 38);
             this.button4.TabIndex = 1;
@@ -224,6 +232,7 @@ namespace SandboxDotNetv2._0._0._0
             // 
             // checkedListBox1
             // 
+            this.checkedListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkedListBox1.ForeColor = System.Drawing.Color.Black;
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Items.AddRange(new object[] {
@@ -236,7 +245,7 @@ namespace SandboxDotNetv2._0._0._0
             "ReflectionPermission - Reflection",
             "ReflectionPermission - ReflectionEmit",
             "FileDialogPermission - Open",
-            "SandboxPermission - AllAccess",
+            "CustomPermission - AllAccess",
             "WebPermission - NetworkAccess",
             "RegistryPermission - Read",
             "RegistryPermission - Write",
@@ -244,14 +253,17 @@ namespace SandboxDotNetv2._0._0._0
             "PrincipalPermission",
             "EnvironmentPermission - Read CommandLine",
             "EnvironmentPermission - AllAcesss"});
-            this.checkedListBox1.Location = new System.Drawing.Point(119, 121);
+            this.checkedListBox1.Location = new System.Drawing.Point(415, 109);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(373, 276);
+            this.checkedListBox1.ScrollAlwaysVisible = true;
+            this.checkedListBox1.Size = new System.Drawing.Size(373, 365);
             this.checkedListBox1.TabIndex = 0;
+            this.checkedListBox1.ThreeDCheckBoxes = true;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(119, 479);
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(117, 410);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(1132, 60);
             this.button3.TabIndex = 6;
@@ -271,7 +283,7 @@ namespace SandboxDotNetv2._0._0._0
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1268, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1652, 28);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -280,14 +292,8 @@ namespace SandboxDotNetv2._0._0._0
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changeBackgroundToolStripMenuItem});
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 26);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(76, 24);
             this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 26);
-            this.aboutToolStripMenuItem.Text = "About";
             // 
             // changeBackgroundToolStripMenuItem
             // 
@@ -295,12 +301,145 @@ namespace SandboxDotNetv2._0._0._0
             this.changeBackgroundToolStripMenuItem.Size = new System.Drawing.Size(225, 26);
             this.changeBackgroundToolStripMenuItem.Text = "Change Background";
             // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.Location = new System.Drawing.Point(415, 84);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(90, 22);
+            this.checkBox1.TabIndex = 8;
+            this.checkBox1.Text = "Select All";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox2.Location = new System.Drawing.Point(1170, 83);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(90, 22);
+            this.checkBox2.TabIndex = 9;
+            this.checkBox2.Text = "Select All";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // checkedListBox3
+            // 
+            this.checkedListBox3.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.checkedListBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkedListBox3.ForeColor = System.Drawing.Color.Black;
+            this.checkedListBox3.FormattingEnabled = true;
+            this.checkedListBox3.Items.AddRange(new object[] {
+            "SecurityPermission - Execution",
+            "SecurityPermission - UnmanagedCode",
+            "FileIOPermission - Read",
+            "FileIOPermission - Write",
+            "FileIOPermission - AllAccess",
+            "UIPermission",
+            "ReflectionPermission - Reflection",
+            "ReflectionPermission - ReflectionEmit",
+            "FileDialogPermission - Open",
+            "CustomPermission - AllAccess",
+            "WebPermission - NetworkAccess",
+            "RegistryPermission - Read",
+            "RegistryPermission - Write",
+            "RegistryPermission - AllAccess",
+            "PrincipalPermission",
+            "EnvironmentPermission - Read CommandLine",
+            "EnvironmentPermission - AllAcesss"});
+            this.checkedListBox3.Location = new System.Drawing.Point(415, 550);
+            this.checkedListBox3.Name = "checkedListBox3";
+            this.checkedListBox3.Size = new System.Drawing.Size(373, 365);
+            this.checkedListBox3.TabIndex = 8;
+            this.checkedListBox3.ThreeDCheckBoxes = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(412, 520);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(168, 18);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "RESTRICTED ACCESS";
+            // 
+            // checkedListBox4
+            // 
+            this.checkedListBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkedListBox4.ForeColor = System.Drawing.Color.Blue;
+            this.checkedListBox4.FormattingEnabled = true;
+            this.checkedListBox4.Location = new System.Drawing.Point(1179, 550);
+            this.checkedListBox4.Name = "checkedListBox4";
+            this.checkedListBox4.Size = new System.Drawing.Size(373, 365);
+            this.checkedListBox4.TabIndex = 11;
+            this.checkedListBox4.ThreeDCheckBoxes = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(1176, 520);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(190, 18);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "UNRESTRICTED ACCESS";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(113, 520);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(171, 22);
+            this.radioButton1.TabIndex = 13;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Enable Access Policy";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(113, 66);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(153, 22);
+            this.radioButton2.TabIndex = 14;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Enable Permission";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(826, 644);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(330, 38);
+            this.button6.TabIndex = 15;
+            this.button6.Text = "ADD >>";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click_1);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(826, 750);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(330, 38);
+            this.button7.TabIndex = 16;
+            this.button7.Text = "<< REMOVE";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // SandboxUserInterface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1268, 565);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(1652, 1055);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -338,11 +477,19 @@ namespace SandboxDotNetv2._0._0._0
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changeBackgroundToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckedListBox checkedListBox3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckedListBox checkedListBox4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button6;
     }
 }

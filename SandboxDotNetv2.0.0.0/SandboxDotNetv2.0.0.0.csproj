@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -52,7 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomPermission.cs" />
+    <Compile Include="Messages.cs" />
     <Compile Include="PermissionType.cs" />
+    <Compile Include="SandboxAccessPolicy.cs" />
     <Compile Include="SandboxUserInterface.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,7 +76,9 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="app.config" />
+    <None Include="Sandbox.config" />
     <None Include="SandboxAssemblyName.snk" />
+    <None Include="SandboxConfigFilePath.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

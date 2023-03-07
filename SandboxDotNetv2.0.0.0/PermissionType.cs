@@ -14,7 +14,7 @@ namespace SandboxDotNetv2._0._0._0
         public const string FILE_IO_PERMISSION_WRITE = "FileIOPermission - Write";
         public const string SECURITY_PERMISSION_ALLACCESS = "FileIOPermission - AllAccess";
         public const string UI_PERMISSION = "UIPermission";
-        public const string SANDBOX_PERMISSION_ALLACCESS = "SandboxPermission - AllAccess";
+        public const string SANDBOX_PERMISSION_ALLACCESS = "CustomPermission - AllAccess";
         public const string REFLECTION_PERMISSION_EMIT = "ReflectionPermission - ReflectionEmit";
         public const string REFLECTION_PERMISSION_REFLECTION = "ReflectionPermission - Reflection";
         public const string WEB_PERMISSION_NETWORK = "WebPermission - NetworkAccess";

@@ -29,7 +29,7 @@ namespace SandboxDotNetv2._0._0._0
             catch (Exception ex)
             {
                 string message = ex.Message.Split(',')[0];
-                MessageBox.Show("Application requires permission to access resource. \n It " + message, "Action needed!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);               
+                MessageBox.Show(Messages.PermissionNeeded + message, Messages.Attention, MessageBoxButtons.OK, MessageBoxIcon.Error);               
             }
 
         }
@@ -38,6 +38,7 @@ namespace SandboxDotNetv2._0._0._0
         {
             AppDomainSetup adSetup = new AppDomainSetup();
             adSetup.ApplicationBase = Path.GetFullPath(pathToUntrusted);
+            //adSetup.C
             return adSetup;
         }
         private static ObjectHandle CreateSandboxAppDomain(PermissionSet permissionSet, AppDomainSetup adSetup, StrongName fullTrustAssembly)
@@ -70,7 +71,7 @@ namespace SandboxDotNetv2._0._0._0
                 // When we print informations from a SecurityException extra information can be printed if we are
                 // calling it with a full-trust stack.
                 Console.WriteLine("SecurityException caught:\n{0}", ex.ToString());
-                MessageBox.Show(ex.Message + " Missing the right permission to execute resource", "Action needed!!!", MessageBoxButtons.OK, MessageBoxIcon.Error);              
+                MessageBox.Show(ex.Message + Messages.CustomPermissionNeeded, Messages.Attention, MessageBoxButtons.OK, MessageBoxIcon.Error);              
                 new PermissionSet(PermissionState.Unrestricted).Assert();            
                 CodeAccessPermission.RevertAssert();
                 return;
