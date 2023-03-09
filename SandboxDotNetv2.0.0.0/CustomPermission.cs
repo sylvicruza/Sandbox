@@ -24,7 +24,8 @@ namespace SandboxDotNetv2._0._0._0
 
         public override SecurityElement ToXml()
         {
-            throw new NotImplementedException();
+            SecurityElement xmlElement = new SecurityElement("MySecurityElement");
+            return xmlElement;
         }
 
         public override bool IsSubsetOf(IPermission target)

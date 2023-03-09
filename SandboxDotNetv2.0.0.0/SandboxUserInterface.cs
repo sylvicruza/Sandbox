@@ -16,7 +16,6 @@ namespace SandboxDotNetv2._0._0._0
 
         //..
         private readonly PermissionSet permissions = new PermissionSet(PermissionState.None);
-        private readonly Sandboxer sandbox = new Sandboxer();
         //..
       
 
@@ -48,14 +47,15 @@ namespace SandboxDotNetv2._0._0._0
                 return;
             }
 
+            Console.WriteLine(permissions);
 
             if (radioButton1.Checked)
             {
                 Console.WriteLine("Enable policy access");
-                sandbox.SetupAndRun(path, untrustedClass, arguments, SandboxAccessPolicy.UpdatePermissionSet(permissions));
+                Sandboxer.SetupAndRun(path, untrustedClass, arguments, SandboxAccessPolicy.UpdatePermissionSet(permissions));
             }
 
-            sandbox.SetupAndRun(path, untrustedClass, arguments, PermissionFactory.PermissionBuilder(permissions));
+            Sandboxer.SetupAndRun(path, untrustedClass, arguments, PermissionFactory.PermissionBuilder(permissions));
 
         }
 
@@ -126,11 +126,11 @@ namespace SandboxDotNetv2._0._0._0
 
 
 
-        private void SearchCheckedListBox(CheckedListBox checkedListBox)
+        private void SearchCheckedListBox(CheckedListBox checkedListBox,CheckBox checkbox)
         {
             for (int i = 0; i < checkedListBox.Items.Count; i++)
             {
-                if (checkBox1.Checked)
+                if (checkbox.Checked)
                 {
                     checkedListBox.SetItemChecked(i, true);
                 }
@@ -175,13 +175,13 @@ namespace SandboxDotNetv2._0._0._0
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            SearchCheckedListBox(checkedListBox1);
+            SearchCheckedListBox(checkedListBox1,checkBox1);
 
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            SearchCheckedListBox(checkedListBox2);
+            SearchCheckedListBox(checkedListBox2,checkBox2);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -189,30 +189,18 @@ namespace SandboxDotNetv2._0._0._0
             MessageBox.Show(Messages.About, Messages.Information, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-      
-
-        private void checkedListBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-           
-           
-        }
-
+     
         private void button6_Click_1(object sender, EventArgs e)
         {
             if (radioButton1.Checked)
-            {
-                MovePermission(checkedListBox3, checkedListBox4);
+            {              
                 foreach (var itemChecked in checkedListBox3.CheckedItems)
-                {
+                {                 
                     var accessType = itemChecked.ToString();
                     var permission = SandboxAccessPolicy.UpdatePermission(accessType);
                     permissions.AddPermission(permission);
                 }
+                MovePermission(checkedListBox3, checkedListBox4);
             }
             else
             {
@@ -232,6 +220,16 @@ namespace SandboxDotNetv2._0._0._0
             {  // Display a message to the user indicating that they need to select an item before moving it
                 MessageBox.Show(Messages.EnableAccess, Messages.OperationFailed, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            SearchCheckedListBox(checkedListBox3,checkBox3);
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            SearchCheckedListBox(checkedListBox4, checkBox4);
         }
     }
 }

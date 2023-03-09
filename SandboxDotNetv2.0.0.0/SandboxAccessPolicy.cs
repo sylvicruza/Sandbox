@@ -14,102 +14,110 @@ namespace SandboxDotNetv2._0._0._0
 {
     public static class SandboxAccessPolicy
     {
+        private const string SecurityPermission = "SecurityPermission";
+        private const string WebPermission = "WebPermission";
+        private const string FileIOPermission = "FileIOPermission";
+        private const string UIPermission = "UIPermission";
+        private const string ReflectionPermission = "ReflectionPermission";
+        private const string PrincipalPermission = "PrincipalPermission";
+        private const string FileDialogPermission = "FileDialogPermission";
+        private const string RegistryPermission = "RegistryPermission";
+        private const string EnvironmentPermission = "EnvironmentPermission";
+
         public static PermissionSet UpdatePermissionSet(PermissionSet permissionSet)
         {
-            try
+            permissionSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
+            foreach (var permission in permissionSet)
             {
-                foreach (var permission in permissionSet)
-                {
-                    permissionSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
-                    if (permission.GetType() == typeof(FileIOPermission) && permission.Equals(new FileIOPermission(FileIOPermissionAccess.Read, AppDomain.CurrentDomain.BaseDirectory)))
-                    {
-                        permissionSet.AddPermission(new FileIOPermission(PermissionState.Unrestricted));
-                    }
-                    else if (permission.GetType() == typeof(WebPermission) && permission.Equals(new WebPermission(NetworkAccess.Connect, "*")))
-                    {
-                        permissionSet.AddPermission(new WebPermission(PermissionState.Unrestricted));
-                    }
-                    else if (permission.GetType() == typeof(SecurityPermission) && permission.Equals(new SecurityPermission(SecurityPermissionFlag.UnmanagedCode)))
-                    {
-                        permissionSet.AddPermission(new SecurityPermission(PermissionState.Unrestricted));
-                    }
-                    else if (permission.GetType() == typeof(FileIOPermission) && permission.Equals(new FileIOPermission(FileIOPermissionAccess.AllAccess, AppDomain.CurrentDomain.BaseDirectory)))
-                    {
-                        permissionSet.AddPermission(new FileIOPermission(PermissionState.Unrestricted));
-                    }
-                    else if (permission.GetType() == typeof(FileIOPermission) && permission.Equals(new FileIOPermission(FileIOPermissionAccess.Write, AppDomain.CurrentDomain.BaseDirectory)))
-                    {
-                        permissionSet.AddPermission(new FileIOPermission(PermissionState.Unrestricted));
-                    }
-                    else if (permission.GetType() == typeof(UIPermission) && permission.Equals(new UIPermission(UIPermissionWindow.AllWindows, UIPermissionClipboard.AllClipboard)))
-                    {
-                        permissionSet.AddPermission(new UIPermission(PermissionState.Unrestricted));
-                    }
-                    else if (permission.GetType() == typeof(ReflectionPermission) && permission.Equals(new ReflectionPermission(ReflectionPermissionFlag.AllFlags)))
-                    {
-                        permissionSet.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
-                    }
-                    else if (permission.GetType() == typeof(ReflectionPermission) && permission.Equals(new ReflectionPermission(ReflectionPermissionFlag.TypeInformation)))
-                    {
-                        permissionSet.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
-                    }
-                    else if (permission.GetType() == typeof(FileDialogPermission) && permission.Equals(new FileDialogPermission(FileDialogPermissionAccess.Open)))
-                    {
-                        permissionSet.AddPermission(new FileDialogPermission(PermissionState.Unrestricted));
-                    }
-                    else if (permission.GetType() == typeof(RegistryPermission) && permission.Equals(new RegistryPermission(RegistryPermissionAccess.AllAccess, "*")))
-                    {
-                        permissionSet.AddPermission(new RegistryPermission(PermissionState.Unrestricted));
-                    }
-                    else if (permission.GetType() == typeof(EnvironmentPermission) && permission.Equals(new EnvironmentPermission(EnvironmentPermissionAccess.Read, "CommandLine")))
-                    {
-                        permissionSet.AddPermission(new EnvironmentPermission(PermissionState.Unrestricted));
-                    }
-                    else if (permission.GetType() == typeof(EnvironmentPermission) && permission.Equals(new EnvironmentPermission(EnvironmentPermissionAccess.AllAccess, "*")))
-                    {
-                        permissionSet.AddPermission(new EnvironmentPermission(PermissionState.Unrestricted));
-                    }
-                    else
-                    {
-                        throw new NotImplementedException();
-                    }
-                }
+                Console.WriteLine(permission.GetType().Name);
 
-                return permissionSet;
+                if (permission.GetType().Name.Contains(SecurityPermission))
+                {
+                    permissionSet.AddPermission(new SecurityPermission(PermissionState.Unrestricted));
+                }
+                else if (permission.GetType().Name.Contains(WebPermission))
+                {
+                    permissionSet.AddPermission(new WebPermission(PermissionState.Unrestricted));
+                }
+                else if (permission.GetType().Name.Contains(FileIOPermission))
+                {
+                    permissionSet.AddPermission(new FileIOPermission(PermissionState.Unrestricted));
+                }
+                else if (permission.GetType().Name.Contains(UIPermission))
+                {
+                    permissionSet.AddPermission(new UIPermission(PermissionState.Unrestricted));
+                }
+                else if (permission.GetType().Name.Contains(ReflectionPermission))
+                {
+                    permissionSet.AddPermission(new ReflectionPermission(PermissionState.Unrestricted));
+                }
+                else if (permission.GetType().Name.Contains(PrincipalPermission))
+                {
+                    permissionSet.AddPermission(new PrincipalPermission(PermissionState.Unrestricted));
+                }
+                else if (permission.GetType().Name.Contains(FileDialogPermission))
+                {
+                    permissionSet.AddPermission(new FileDialogPermission(PermissionState.Unrestricted));
+                }
+                else if (permission.GetType().Name.Contains(RegistryPermission))
+                {
+                    permissionSet.AddPermission(new RegistryPermission(PermissionState.Unrestricted));
+                }
+                else if (permission.GetType().Name.Contains(EnvironmentPermission))
+                {
+                    permissionSet.AddPermission(new EnvironmentPermission(PermissionState.Unrestricted));
+                }
+                else
+                {
+                    MessageBox.Show(Messages.InvalidPermission, Messages.OperationFailed, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+
+                }
             }
-            catch (Exception ex)
-            {
-                throw new ArgumentException();
-            }
+
+            return permissionSet;
+
         }
 
 
         public static IPermission UpdatePermission(string permissionType)
         {
-           return PermissionFactory.CreatePermission(permissionType);
-           
+            return PermissionFactory.CreatePermission(permissionType);
+
         }
-        public static void UpdatePermissionFromCommandLine(string permissionName, bool allowed)
+
+        public static PermissionSet GetPermissionsFromConfig(string configFilePath)
         {
-            string _configFilePath = ConfigurationManager.AppSettings["SandboxConfigFilePath"];
+            var permissionSet = new PermissionSet(PermissionState.None);
+
             try
             {
                 var doc = new XmlDocument();
-                doc.Load(_configFilePath);
-                var permissionNode = doc.SelectSingleNode($"configuration/runtime/security/requestPermission[@class='{permissionName}, mscorlib']");
+                doc.Load(configFilePath);
+                var permissionNodes = doc.SelectNodes("configuration/runtime/security/requestPermission");
 
-                if (permissionNode != null)
+                if (permissionNodes != null)
                 {
-                    permissionNode.Attributes["Unrestricted"].Value = allowed.ToString();
-                    doc.Save(_configFilePath);
+                    foreach (XmlNode permissionNode in permissionNodes)
+                    {
+                        var className = permissionNode.Attributes["class"].Value;
+                        var unrestricted = bool.Parse(permissionNode.Attributes["Unrestricted"].Value);
+
+                        var permissionType = Type.GetType(className);
+                        var permission = unrestricted ? (CodeAccessPermission)Activator.CreateInstance(permissionType) : null;
+
+                        permissionSet.AddPermission(permission);
+                    }
                 }
-                
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating permission: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Error reading permissions from config file: {ex.Message}");
             }
+
+            return permissionSet;
         }
+
 
 
     }

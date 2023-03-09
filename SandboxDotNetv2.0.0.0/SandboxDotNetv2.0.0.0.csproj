@@ -78,7 +78,6 @@
     <None Include="app.config" />
     <None Include="Sandbox.config" />
     <None Include="SandboxAssemblyName.snk" />
-    <None Include="SandboxConfigFilePath.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

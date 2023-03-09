@@ -2,8 +2,6 @@
 using System.Net;
 using System.Security.Permissions;
 using System.Security;
-using System.Collections.Generic;
-using System.Collections;
 
 namespace SandboxDotNetv2._0._0._0
 {
@@ -76,6 +74,7 @@ namespace SandboxDotNetv2._0._0._0
 
         public static PermissionSet PermissionBuilder(PermissionSet permissionSet)
         {
+            permissionSet.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
             foreach (IPermission permission in permissionSet)
             {
                 if (permission.GetType() == typeof(CustomPermission) && permission.Equals(new CustomPermission()))
